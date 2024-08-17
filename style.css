@@ -297,6 +297,7 @@ h2{
 }
 .prof-container{
     display: flex;
+    flex-wrap: wrap;
 }
 .profit-item{
     color:black;
