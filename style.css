@@ -15,7 +15,7 @@ body{
 h1{
     font-family: 'SF Pro Display';
     font-weight: 450;
-    font-size: 7vw;
+    font-size: 10vh;
 }
 
 p{
@@ -34,11 +34,14 @@ p{
     font-size: 30px;
     font-weight: 800;
     color: var(--company-blue);
+
+    border: var(--white);
+    border-style: solid;
 }
 
 .nav-button:hover {
-    background-color: #ff0051;
-    color:white;
+    background-color: var(--company-blue);
+    color: white;
 }
 
 
@@ -293,11 +296,13 @@ h2{
 
 .profitability{
     background-color: var(--company-blue);
-    padding: 10vh 10vw;    
+    padding: 10vh 10vw; 
+    
 }
 .prof-container{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;   
 }
 .profit-item{
     color:black;
@@ -305,11 +310,12 @@ h2{
     border-radius: 10px;
     padding: 5px 20px;
     margin: 10px;
+    max-width: 27%;
 }
 .profit-item h3{
     color: var(--company-blue);
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 450;
 }
 .profit-head{
     display: flex;
@@ -322,7 +328,150 @@ h2{
     border-radius: 10000px;
     height:min-content;
 }
-.better-travel, .about-panel, .hero-panel{
+
+@media screen and (max-width: 1100px) { 
+    .prof-container{
+        flex-wrap: wrap;
+        flex-direction: row;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .profit-item{
+        min-width: calc(100% - 20px); /* Adjusted for margin */
+        padding: 5px 10px;
+        margin: 10px 0; /* Reduced margin */
+        max-width: calc(100% - 20px); /* Adjusted for margin */
+    }
+}
+
+.end-card{ /* parent */
+    background-color: var(--black);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 7vh;
+    flex-wrap: wrap;
+}
+.links{ /* child */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 30vw;
+    padding: 3vh 5vw;
+}
+.links h2{
+    flex-basis: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 35px;
+}
+.links a{
+    flex-basis: 45%;
+    color: var(--white);
+    font-size: 17px;
+    padding-right: 10px;
+
+}
+@media screen and (max-width: 800px) {
+    .end-card img{
+        max-width: 200px;
+        max-height: 100px;
+        padding: 0;
+
+    }
+    .links{
+        padding: 0;
+        margin: 0;
+        width: auto;
+    }
+    .links h2{
+        font-size: 25px;
+        margin-top: 30px;
+    }
+    .links a{
+        font-size: 13px;
+        padding: 5px;
+    }
+}
+
+.cost-section, .better-travel, .about-panel, .hero-panel, .profitability, .end-card{
     /* display: none; */
 }
 
+/* TRANSPORT COST SECTION */
+.cost-section{
+    background-color: black;
+    margin: 0;
+    padding: 5vh 17vw;
+    
+    text-align: left;
+}
+.cost-section img{
+    height: auto;
+    width: 100%;
+}
+.cost-section h2, h1{
+    margin-bottom: 40px;
+}
+
+/* ENVIROMENTALLY FRIENDLY */
+.enviroment-facts{
+    background: var(--white);
+    padding: 10vh 17vw;
+    margin: 0;
+    color: var(--white);
+}
+.facts-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 70vh;
+    justify-content: flex-start;
+}
+.fact-item{
+    background-color: black;
+    border-radius: 10px;
+    padding: 25px 25px;
+    flex-basis: 25%;
+    flex-grow: 1;
+    min-height: 35vh;
+}
+.fact-item.main{
+    flex-basis: 100%;
+    background-color: var(--company-blue);
+    height: auto;
+    min-height: 5vh;
+    overflow: hidden;
+    display: flex;
+}
+.fact-item.main .focal{
+    flex-basis: 20%;
+}
+.fact-item h2{
+    margin: 0;
+    font-size: 4vh;
+}
+li{
+    font-size: 2vh;
+    font-weight: 300;
+}
+
+@media screen and (max-width: 800px){
+    .enviroment-facts h1{
+        font-size: 9.5vw;
+    }
+    .facts-container{
+        height: auto;
+    }
+    .fact-item{
+        height: auto;
+        min-height: 15vh;
+        flex-basis: 100%;
+    }
+    .side-text ul, .focal{
+        display: none;
+    }
+    .fact-item h2{
+        line-height: 10vw;
+    }
+}
