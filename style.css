@@ -1,0 +1,259 @@
+:root{
+    --company-blue: #1f35b2;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+body{
+    /* background-color: rgb(255, 0, 0); */
+    color: white;
+    font-family: 'SF Pro Display', Helvetica;
+    text-align: left;
+
+    margin: 0px;
+    padding: 0px;
+
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+
+h1{
+    text-align: left;
+    font-size: 50px;
+    margin-bottom: 15px;
+
+    width: 100%;
+}
+p{
+    /* margin: 20px 20px; */
+    font-size: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.panel{
+    min-height: 80vh;
+    padding: 5em 12em;
+    max-width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+
+    background-color: var(--company-blue);
+}
+
+.hero-panel {
+    display: flex;
+    height: 80vh;
+    min-width: 100vw;
+    background-color: red;
+}
+
+.left-hero{
+    width: 60vw;
+    height: 100%;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 1em 4em 3em 6em;
+}
+.right-hero {
+    background-color: aqua;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.right-hero img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+#iframe-pair{
+    margin-right: 5vw;
+}
+.align-center{
+    align-content: center;
+}
+
+.head-text-pair{
+    width: 100%;
+    text-align: left;
+    align-content: center;
+    /* padding-right: 50px; */
+    /* align-self: center; */
+}
+.head-text-pair h2{
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+.head-text-pair p{
+    font-size: 20px;
+}
+
+iframe {
+    align-self: center;
+    width: 100%;  /* Take full width of container */
+    max-width: 400px;  /* Maximum width */
+    aspect-ratio: 16 / 9;  /* Maintain aspect ratio - adjust these numbers based on your needs */
+    height: auto;  /* Height will be calculated based on aspect ratio */
+}
+.row{
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+.fact-item{
+    flex: 1;
+    margin: 0.5em;
+    padding: 1.5em;
+    border-radius: 20px;
+    min-height: 13vh;
+    box-sizing: border-box;
+}
+.fact-item p, .fact-item h2{
+    margin: 0;
+}
+h3{
+    font-size: 1.6em;
+    font-weight: 500;
+    text-align: center;
+    /* align-content: end; */
+}
+.panel img{
+    margin: 3vh auto;  
+    align-self: center;  
+}
+.end-card .head-text-pair{
+    margin-left: 3em;
+}
+
+#cost-graph{
+    width: 80%;
+    height: auto;
+}
+
+.enviro .head-text-pair{
+    align-content: stretch; 
+}
+
+/* Media Query: Half screen sizes (768px to 1024px) */
+@media (max-width: 1000px) and (min-width: 770px){
+    #cost-graph{
+        width: 100%;
+        height: auto;
+    }
+    .enviro .head-text-pair{
+        align-content: center; 
+    }
+    .left-hero img{
+        width: 400px; 
+        height: 200px;
+    }
+    h1{
+        font-size: 60px;
+    }
+    .row{
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 0;
+        overflow: hidden;
+    }
+    .fact-item{
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0.5em 0;
+        padding: 1em;
+    }
+    .end-card{
+        flex-direction: column;
+        align-items: center;
+        max-height: 30vh;
+    } 
+    .links{
+        text-align: center;
+    }
+}
+
+/* Media Query: Phone Screen */
+@media (max-width: 770px) {
+    .left-hero img{
+        width: 400px; 
+        height: 200px;
+    }
+    .hero-panel{
+        flex-direction: column;
+        height: auto;
+        width: 100vw;
+    }
+    .panel{
+        flex-direction: column;
+        padding: 1em 2em;
+        min-height: 50vh;
+    }
+    .left-hero{
+        padding: 1em;
+        min-width: 100vw;
+        min-height: 80vh;
+        display: flex; 
+        flex:1;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .right-hero{
+        background-color: aqua;
+        height: 70vh;
+    }
+    .head-text-pair{
+        text-align: center;
+        /* padding: 50px 0; */
+
+    }
+    .head-text-pair h2{
+        font-size: 1.75em;
+        margin: 0 0.5em 0.5em 0.5em;
+    }
+    h1{
+        text-align: center;
+        font-size: 3em;
+    }
+    p{
+        font-size: 1.6em;
+        text-align: center;
+    }
+    .row{
+        box-sizing: border-box;
+        flex-direction: column;
+        padding: 0;
+        overflow: hidden;
+    }
+    .fact-item{
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0.5em 0;
+        padding: 1em;
+    }
+    .enviro .head-text-pair{
+        align-content: center; 
+    }
+    #cost-graph{
+        width: 110%;
+        height: auto;
+    }
+    #cost-graph{
+        width: 90%;
+    }
+}
