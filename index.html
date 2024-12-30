@@ -6,6 +6,8 @@
     <title>Swift Rails</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
+    <script src="scripts.js"></script>
+
 </head>
 <body>
     <nav id="top-nav" class="top-nav">
@@ -136,38 +138,16 @@
     <div class="panel end-card" style="background-color: black;">
             <img src="images/logo.png" alt="Swift Rails Logo"
             style="width: 30vw; height: auto; filter: invert(1); align-self: center;" >
-            <div style="flex: 1;">
+            <div style="flex: 1; margin-left: 3em;">
                 <h2>Quick Links</h2>
-                <div class="links" style="display: flex; flex-direction: column;">
-                    <a href="about.html">About</a>
-                    <a href="">Executive Team</a>
-                    <a href="contact-form.html">Contact Us</a>
-                </div>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="executive-team.html">Executive Team</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="impact.html">Impact</a></li>
+                    <li><a href="contact-form.html">Contact Us</a></li>
+                </ul>
             </div>
     </div>
 </body>
 </html>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const nav = document.getElementById('top-nav');
-        const endCard = document.querySelector('.end-card');
-        
-        function checkNavVisibility() {
-            if (endCard) {
-                const rect = endCard.getBoundingClientRect();
-                const isEndCardVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
-                
-                if (isEndCardVisible) {
-                    nav.classList.add('hidden');
-                } else {
-                    nav.classList.remove('hidden');
-                }
-            }
-        }
-
-        window.addEventListener('scroll', checkNavVisibility);
-        // Check initial visibility
-        checkNavVisibility();
-    });
-</script>
