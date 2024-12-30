@@ -17,19 +17,50 @@ body{
     overflow-x: hidden;
 }
 
-
-h1{
-    text-align: left;
-    font-size: 50px;
-    margin-bottom: 15px;
-
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    background-color: black;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
 }
-p{
-    /* margin: 20px 20px; */
-    font-size: 20px;
-    text-align: left;
-    width: 100%;
+
+.top-nav.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.top-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.top-nav li {
+    margin: 0 20px;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.top-nav a:hover {
+    color: var(--company-blue);
 }
 
 .panel{
@@ -44,6 +75,7 @@ p{
 }
 
 .hero-panel {
+    margin-top: 60px;
     display: flex;
     height: 80vh;
     min-width: 100vw;

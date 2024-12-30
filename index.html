@@ -6,9 +6,20 @@
     <title>Swift Rails</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
-
 </head>
 <body>
+    <nav id="top-nav" class="top-nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="executive-team.html">Executive Team</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="impact.html">Impact</a></li>
+                <li><a href="contact-form.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="hero-panel">
         <!-- Left Section -->
         <div class="panel left-hero" style="">
@@ -136,3 +147,27 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.getElementById('top-nav');
+        const endCard = document.querySelector('.end-card');
+        
+        function checkNavVisibility() {
+            if (endCard) {
+                const rect = endCard.getBoundingClientRect();
+                const isEndCardVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+                
+                if (isEndCardVisible) {
+                    nav.classList.add('hidden');
+                } else {
+                    nav.classList.remove('hidden');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', checkNavVisibility);
+        // Check initial visibility
+        checkNavVisibility();
+    });
+</script>

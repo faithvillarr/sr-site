@@ -17,7 +17,7 @@
             font-family: 'SF Pro Display', Helvetica, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--gray);
+            background-color: var(--company-blue);
             color: var(--black);
         }
 
@@ -149,6 +149,7 @@
             e.preventDefault();
             
             const recaptchaResponse = grecaptcha.getResponse();
+            console.log(typeof(recaptchaResponse));
             if (!recaptchaResponse) {
                 alert('Please complete the reCAPTCHA');
                 return;
