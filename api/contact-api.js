@@ -1,63 +1,82 @@
-import { createTransport } from 'nodemailer';
+import { NextResponse } from 'next/server';
+import axios from 'axios';
+import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+export async function POST(request) {
+  if (request.method !== 'POST') {
+    return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
   }
 
-  const { name, email, message, recaptchaToken } = req.body;
-
-  // Verify reCAPTCHA
   try {
-    const recaptchaResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+    const { name, email, message, recaptchaToken } = await request.json();
+
+    // Verify required fields
+    if (!name || !email || !message || !recaptchaToken) {
+      return NextResponse.json(
+        { message: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA
+    const recaptchaVerification = await axios.post(
+      'https://www.google.com/recaptcha/api/siteverify',
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET_KEY,
+          response: recaptchaToken,
+        },
+      }
+    );
+
+    if (!recaptchaVerification.data.success) {
+      return NextResponse.json(
+        { message: 'reCAPTCHA verification failed' },
+        { status: 400 }
+      );
+    }
+
+    // Create email transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS, // Use your app-specific password
       },
-      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
     });
 
-    const recaptchaData = await recaptchaResponse.json();
+    // Send email
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER, // Sending to yourself
+      subject: `New Contact Form Submission from ${name}`,
+      text: `New contact form submission received:
 
-    if (!recaptchaData.success) {
-      return res.status(400).json({ message: 'Invalid reCAPTCHA' });
-    }
+Name: ${name}
+Email: ${email}
+
+Message:
+${message}
+
+This message was sent from your website's contact form.`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <h3>Message:</h3>
+        <p>${message.replace(/\n/g, '<br>')}</p>
+        <br>
+        <p><small>This message was sent from your website's contact form.</small></p>
+      `
+    });
+
+    return NextResponse.json({ message: 'Message sent successfully' });
   } catch (error) {
-    return res.status(500).json({ message: 'reCAPTCHA verification failed' });
-  }
-
-  // Configure email transporter
-  const transporter = createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-
-  // Email options
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: 'bookeater999@gmail.com',
-    subject: `New Contact Form Submission from ${name}`,
-    text: `
-      Name: ${name}
-      Email: ${email}
-      Message: ${message}
-    `,
-    html: `
-      <h3>New Contact Form Submission</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong> ${message}</p>
-    `
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    return res.status(200).json({ message: 'Email sent successfully' });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return res.status(500).json({ message: 'Failed to send email' });
+    console.error('Error processing contact form:', error);
+    return NextResponse.json(
+      { message: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

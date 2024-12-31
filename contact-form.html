@@ -132,6 +132,7 @@
     <div class="container" style="margin-top: 5em;">
         <div class="contact-form">
             <h1>Contact Us</h1>
+            <!-- Replace this in your contact-form.html -->
             <form id="contactForm">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -148,13 +149,12 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
 
-                <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                <div class="g-recaptcha" data-sitekey="{process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}"></div>
                 
                 <button type="submit">Send Message</button>
             </form>
             <div class="success-message">Your message has been sent successfully!</div>
             <div class="error-message">There was an error sending your message. Please try again.</div>
-        </div>
     </div>
 
     <script>
